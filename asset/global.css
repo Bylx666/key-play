@@ -1,0 +1,533 @@
+@font-face {
+  font-family: icon;
+  src: url(/asset/iconfont.woff2);
+}
+@font-face {
+  font-family: code;
+  src: url(/asset/code.woff2);
+}
+
+ico {
+  font-family: icon;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+a, jmp {
+  text-decoration: none;
+  color: #dee;
+  margin: 0 5px;
+  transition: text-shadow 0.2s;
+}
+a::before, jmp::before {
+  content: "\e866";
+  font-family: icon;
+  font-size: 12px;
+}
+jmp {
+  cursor: pointer;
+}
+a:hover, jmp:hover {
+  text-shadow: 0 0 3px #fff;
+}
+
+::selection {
+  background-color: #fff3;
+  text-shadow: 0 0 2px #000;
+}
+::-webkit-scrollbar {
+  display: none;
+}
+html {
+  position: fixed;
+  width: 100%;height: 100%;
+}
+body {
+  background-color: #2A3333;
+  margin: 0;
+  color: #fff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+
+body > header {
+  z-index: 10;
+  position: absolute;
+  height: 60px;
+  width: 100%;
+  background-color: #000;
+  box-shadow: 0 2px 30px #000;
+  overflow: hidden;
+  display: flex;
+}
+body > header > ico {
+  color: #bcc;
+  font-size: 24px;
+  line-height: 60px;
+  padding: 0 20px 0 30px;
+  cursor: pointer;
+  transition: text-shadow 0.2s;
+  height: 60px;
+}
+body > header > ico:hover {
+  text-shadow: 0 0 3px #fff;
+}
+body > header > img {
+  height: 50px;
+  width: 50px;
+  margin: 7px 20px 0 0;
+}
+body > header > h2 {
+  color: #abb;
+  margin: 0;
+  line-height: 60px;
+  font-size: 16px;
+  font-weight: normal;
+  flex-grow: 1;
+}
+body > header > buts {
+  color: #bcc;
+  padding-right: 80px;
+  display: flex;
+}
+body > header > buts > but {
+  font-size: 16px;
+  line-height: 60px;
+  transition: text-shadow 0.2s;
+  padding: 0 20px;
+  cursor: pointer;
+}
+body > header > buts > but::before {
+  content: "\e86f";
+  font-family: icon;
+  padding-right: 5px;
+}
+body > header > buts > but:hover {
+  text-shadow: 0 0 3px #fff;
+}
+body > header > mobile-menu {
+  display: none;
+}
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  75% {
+    opacity: 1;
+  }
+}
+body > header.load::after {
+  content: "";
+  position: absolute;
+  left: 0;bottom: 0;width: 100%;
+  height: 3px;
+  background-color:#788;
+  animation: blink 2s infinite;
+}
+
+
+main {
+  position: absolute;
+  top: 60px;
+  height: calc(100% - 60px);
+  width: 100%;
+  display: flex;
+  transition: transform 0.5s;
+  overflow: hidden;
+}
+main::after {
+  content: "KEY LANGUEGE SPEC";
+  white-space: nowrap;
+  z-index: 0;
+  position: absolute;
+  left: -30px;
+  bottom: 10px;
+  font-size: 170px;
+  font-weight: bolder;
+  color: #3446;
+}
+
+main > nav, main > para {
+  z-index: 1;
+  color: #cdd;
+  position: relative;
+  overflow: hidden auto;
+  padding: 70px 20px 70px 20px;
+  flex-grow: 1;
+  scrollbar-width: none;
+}
+main > nav {
+  padding: 50px 20px 50px 20px;
+}
+
+main > nav p {
+  font-size: 18px;
+  line-height: 32px;
+}
+main > para > a {
+  font-size: 16px;
+  line-height: 20px;
+}
+main > nav p, main > para > a {
+  margin: 0 20px 0 0;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.2s;
+  width: 200px;
+  max-width: calc(100% - 20px);
+  padding-left: 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}
+main > nav p::before, main > para > a::before {
+  content: "\e871";
+  font-family: icon;
+  font-size: 15px;
+  line-height: 30px;
+  padding-right: 15px;
+}
+main > nav div {
+  margin: 5px 0 10px 20px;
+  border-left: 2px #677 dashed;
+} 
+main > nav p:hover, main > para > a:hover {
+  background-color: #fff2;
+  text-shadow: none;
+}
+main > nav p.inactive:hover {
+  background-color: transparent;
+}
+
+@keyframes fade-in {
+  0% {
+    transform: translateY(15px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+}
+
+main > article {
+  z-index: 2;
+  position: relative;
+  background-color: #1C2222;
+  box-shadow: 0 0 10px #1C2222;
+  padding: 30px;
+  width: 700px;
+  max-width: 100%;
+  overflow: hidden auto;
+  font-size: 18px;
+  animation: fade-in 0.2s;
+  transition: transform 0.3s;
+  scrollbar-width: none;
+}
+main > scroll {
+  z-index: 1;
+  position: relative;
+  height: 0;
+  width: 5px;
+  right: 0;
+  top: 0;
+  background-image: linear-gradient(0deg, #bcc, #dee0);
+  border-radius: 2px;
+}
+
+main > article > h1 {
+  color: #eff;
+  font-size: 27px;
+  margin: 40px 0 0 0;
+  position: relative;
+}
+main > article > h1::before {
+  content: "\e871";
+  font-family: icon;
+  padding-right: 15px;
+  font-size: 30px;
+}
+main > article > h1::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: -8px;
+  height: 2px;
+  background-image: linear-gradient(-90deg, #dee, transparent);
+}
+
+main > article > h2 {
+  color: #dee;
+  font-size: 24px;
+  margin: 30px 0 5px 0;
+  padding: 0 5px;
+  position: relative;
+  display: inline-block;
+}
+main > article > h2 > code {
+  background: none;
+}
+main > article > h2::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: 0px;
+  height: 8px;
+  background-color: #cdd5;
+}
+
+main > article > h3 {
+  color: #cdd;
+  font-size: 20px;
+}
+main > article > h4 {
+  color: #bcc;
+  font-size: 20px;
+}
+
+main > article > p {
+  padding-left: 20px;
+  margin: 20px 0;
+  line-height: 27px;
+}
+main > article > p > img {
+  display: block;
+  width: calc(100% - 20px);
+  border-radius: 5px;
+  box-shadow: 0 0 10px #000;
+}
+
+main > article > pre > code {
+  display: block;
+  padding: 10px 20px;
+  overflow-y: auto;
+  white-space: pre;
+  font-size: 18px;
+  line-height: 27px;
+}
+
+main > article > ol, main > article > ul {
+  padding: 0 0 0 20px;
+  margin: 5px 20px;
+}
+main > article > ol > li, main > article > ul > li {
+  padding: 5px 5px;
+}
+main > article > ol > li::marker {
+  color: #cdd;
+}
+main > article > ul > li::marker {
+  content: "\e842";
+  font-family: icon;
+  font-size: 15px;
+  color: #cdd;
+}
+
+
+main > article table {
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  margin: 10px 10px;
+  width: calc(100% - 20px);
+  /* 这算ntr么 */
+  display: block;
+  overflow: auto;
+}
+main > article th {
+  color: #abb;
+  font-size: 15px;
+  text-align: left;
+  border-bottom: 2px solid #abb;
+  padding-bottom: 10px;
+}
+main > article td {
+  white-space: nowrap;
+  padding-top: 10px;
+  border-bottom: 1px solid #344;
+}
+main > article td:first-child {
+  /* border-right: 2px solid #abb; */
+  padding-right: 30px;
+}
+
+main > para > .H2 {
+  margin-left: 10px;
+  width: 190px;
+  max-width: calc(100% - 30px);
+}
+main > para > .H3 {
+  margin-left: 20px;
+  width: 180px;
+  max-width: calc(100% - 40px);
+}
+main > para > .H4 {
+  margin-left: 30px;
+  width: 170px;
+  max-width: calc(100% - 50px);
+}
+
+main > article > ret {
+  display: flex;
+  margin: 10px;
+  width: calc(100% - 20px);
+}
+main > article > ret > d {
+  flex-grow: 1;
+  /* background-color: #fff; */
+  font-size: 24px;
+  margin: 10px;
+  border-radius: 5px;
+  border: 2px solid #cdd;
+  color: #cdd;
+  text-align: center;
+  line-height: 50px;
+  cursor: pointer;
+  transition: box-shadow 0.2s;
+}
+main > article > ret > d:last-child {
+  background-color: #cdd;
+  color: #1C2222;
+}
+main > article > ret > d:hover {
+  box-shadow: 0 0 10px #cdd;
+}
+
+about {
+  position: absolute;
+  top: 60px;
+  height: calc(100% - 60px);
+  width: 100%;
+  transition: transform 0.5s;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: code;
+  perspective: 200px;
+  transform-style: preserve-3d;
+}
+
+about > svg {
+  height: 300px;
+}
+
+about > h1 {
+  font-size: 48px;
+  margin: 40px 0 25px 0;
+}
+about > p {
+  font-size: 9px;
+  margin: 0;
+}
+about > links {
+  position: absolute;
+  bottom: 30px;
+  display: flex;
+}
+about > links > a {
+  margin: 20px;
+  flex-grow: 1;
+}
+about > bg {
+  z-index: -1;
+  position: absolute;
+  width: 200%;
+  height: 100%;
+  left: 0; top: 0;
+  background-image: linear-gradient(45deg, 
+    transparent 0%, 
+    transparent 15%, #303a35 20%, transparent 25%, 
+    transparent 60%, #354240 68%, transparent 75%, 
+    transparent 100%
+  );
+  background-size: 50% 100%;
+  background-repeat: repeat;
+}
+
+
+@media screen and (max-width: 1000px) {
+  main > nav p {
+    font-size: 14px;
+  }
+  main > article {
+    font-size: 16px;
+  }
+  main > para {
+    width: 0;
+    padding: 0;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  body > header {
+    transition: height 0.5s, background-color 0.5s;
+  }
+  body > header::before {
+    content: "跳转完成后再次点击关闭菜单 ^";
+    position: absolute;
+    right: 40px;
+    top: 70px;
+    font-size: 12px;
+    color: #899;
+  }
+  body > header > buts {
+    display: none;
+    position: absolute;
+    top: 110px;
+    left: 0px;
+    color: #dee;
+  }
+  body > header > buts > but {
+    display: block;
+    font-size: 15px;
+    line-height: 18px;
+    padding: 10px 40px;
+  }
+  body > header > mobile-menu {
+    display: block;
+    position: absolute;
+    right: 0;top: 0;
+    padding: 10px 30px;
+    font-size: 24px;
+    line-height: 40px;
+    color: #cee;
+    transition: background-color 0.2s, color 0.2s;
+  }
+  body > header > mobile-menu:active {
+    background-color: #cee;
+    color: #344;
+  }
+  main > nav {
+    z-index: 11;
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 00px;
+    height: 100%;
+    width: 50%;
+  }
+  main > article {
+    width: calc(100% - 40px);
+    padding: 20px;
+    transition: filter 0.5s;
+  }
+  main.blur > article {
+    filter: blur(5px);
+  }
+  main > article > pre > code {
+    font-size: 16px;
+  }
+}
