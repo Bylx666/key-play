@@ -21,72 +21,79 @@ function create_editor() {
   return $e;
 }
 
-{
-  const $files = document.querySelector("files");
-  const $file_add = new_dom("ico");
-  const file_add = (name)=> {
-    let $f = new_dom("div");
-    const modify_name = ()=> {
-      let $inp = new_dom("input");
-      $inp.value = $f.textContent;
-      $inp.onchange = ()=> {
-        tip_close();
-        $f.textContent = $inp.value.replace(/\>/g, "");
-        $codes.classList[$files.scrollWidth > $files.clientWidth?"add":"remove"]("overflow");
-      };
-      tip($inp, "修改你的文件名");
-    };
 
-    $f.onclick = ()=> {
-      $codes.children[2].remove();
-      $codes.append($f.editor);
-
-      for($file of $files.children) $file.className = "";
-      $f.className = "act";
-    }
-    $f.ondblclick = modify_name;
-    $f.oncontextmenu = (e)=> {
-      const $file_menu = new_dom("file-menu");
-      let {clientX, clientY} = e;
-      let $modify = new_dom("div");
-      let $delete = new_dom("div");
-
-      e.preventDefault();
-      $file_menu.style.cssText = `left:${clientX}px;top:${clientY}px`;
-      $codes.append($file_menu);
-      document.addEventListener("click",function _cl(){
-        document.removeEventListener("click", _cl);
-        $file_menu.remove();
-      });
-
-      $modify.innerHTML = "<ico>&#xe839;</ico>改名";
-      $modify.onclick = modify_name;
-      $file_menu.append($modify);
-      $delete.innerHTML = "<ico>&#xe83b;</ico>删除";
-      $delete.onclick = ()=> $f.remove();
-      $file_menu.append($delete);
-    }
-
-    $f.editor = create_editor();
-    $f.textContent = name;
-    $file_add.insertAdjacentElement("beforebegin", $f);
-
-    if($files.scrollWidth > $files.clientWidth) $codes.classList.add("overflow");
-  };
-
-  $file_add.innerHTML = "&#xe840;";
-  $files.append($file_add);
-  $file_add.onclick = ()=> {
+const $files = document.querySelector("files");
+const $file_add = new_dom("ico");
+const file_add = (name)=> {
+  let $f = new_dom("div");
+  const modify_name = ()=> {
     let $inp = new_dom("input");
+    $inp.value = $f.textContent;
     $inp.onchange = ()=> {
       tip_close();
-      file_add($inp.value.replace(/\>/g, ""));
+      $f.textContent = $inp.value.replace(/\>/g, "");
+      $codes.classList[$files.scrollWidth > $files.clientWidth?"add":"remove"]("overflow");
     };
-    tip($inp, "输入新文件名");
+    tip($inp, "修改你的文件名");
   };
-  file_add("main");
-  $files.children[0].onclick();
-}
+
+  $f.onclick = ()=> {
+    $codes.children[2].remove();
+    $codes.append($f.editor);
+
+    for($file of $files.children) $file.className = "";
+    $f.className = "act";
+  }
+  $f.ondblclick = modify_name;
+  $f.oncontextmenu = (e)=> {
+    const $file_menu = new_dom("file-menu");
+    let {clientX, clientY} = e;
+    let $modify = new_dom("div");
+    let $delete = new_dom("div");
+
+    e.preventDefault();
+    $file_menu.style.cssText = `left:${clientX}px;top:${clientY}px`;
+    $codes.append($file_menu);
+    document.addEventListener("click",function _cl(){
+      document.removeEventListener("click", _cl);
+      $file_menu.remove();
+    });
+
+    $modify.innerHTML = "<ico>&#xe839;</ico>改名";
+    $modify.onclick = modify_name;
+    $file_menu.append($modify);
+
+    $delete.innerHTML = "<ico>&#xe83b;</ico>删除";
+    $delete.onclick = ()=> {
+      if($f.nextSibling&&$f.nextSibling.tagName!=="ICO") $f.nextSibling.onclick();
+      else if($f.previousSibling) $f.previousSibling.onclick();
+      else {$file_add.onclick()}
+      $f.remove();
+    };
+    $file_menu.append($delete);
+  }
+
+  $f.editor = create_editor();
+  $f.textContent = name;
+  $f.onclick();
+  $file_add.insertAdjacentElement("beforebegin", $f);
+
+  if($files.scrollWidth > $files.clientWidth) $codes.classList.add("overflow");
+  return $f;
+};
+
+$file_add.innerHTML = "&#xe840;";
+$files.append($file_add);
+$file_add.onclick = ()=> {
+  let $inp = new_dom("input");
+  $inp.onchange = ()=> {
+    tip_close();
+    file_add($inp.value.replace(/\>/g, ""));
+  };
+  tip($inp, "输入新文件名");
+};
+file_add("main");
+$files.children[0].onclick();
 
 const $tip = document.querySelector("tip");
 const $tip_inn = $tip.children[0];
@@ -118,4 +125,12 @@ document.addEventListener("click", (e)=> {
   $clickeff.append(d);
 });
 
+if(window.opener) {
+  window.opener.postMessage("load", "*");
+  window.onmessage = ({data})=> {
+    if(typeof data==="string") 
+      file_add("sample").editor.sess.session.doc.setValue(data);
+  }
+  window.addEventListener("beforeunload", ()=> window.opener.postMessage("close", "*"));
+}
 // ctrl +enter, +s 滚动条

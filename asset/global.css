@@ -273,9 +273,9 @@ body > main {
   content: "运行";
 }
 #codes > run:hover {
-  background-color: #ebb;
+  background-color: #eff;
   color: #122;
-  box-shadow: 0 0 3px 2px #ebb;
+  box-shadow: 0 0 3px 2px #eff;
 }
 
 #codes > div {
