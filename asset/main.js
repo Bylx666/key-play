@@ -92,8 +92,6 @@ $file_add.onclick = ()=> {
   };
   tip($inp, "输入新文件名");
 };
-file_add("main");
-$files.children[0].onclick();
 
 const $tip = document.querySelector("tip");
 const $tip_inn = $tip.children[0];
@@ -136,9 +134,48 @@ if(window.opener) {
 
 load("load");
 
-let console_tester = /./;
-console_tester.toString = ()=> {
-  document.querySelector("main").className = "";
-};
-console.log(console_tester);
-console.log("%c欢迎来到Key Lang", "background-image:linear-gradient(30deg, #effa, #bcc8);padding:20px 40px;line-height:36px;font-size:24px;color:#344;");
+let $buts = document.querySelector("buts").children;
+let $inf = document.querySelector("inf");
+$inf.remove();
+$buts[0].onclick = ()=> window.open("https://docs.subkey.top/wasm", "_blank");
+$buts[1].onclick = ()=> tip($inf, "关于");
+
+window.addEventListener("keydown", (e)=> {
+  if(!e.ctrlKey) return;
+  switch (e.key) {
+    case "Enter": 
+      $run.click();
+      return e.preventDefault();
+    case "s": 
+      for($f of $files.children) if($f.className==="act") {
+        let a = new_dom("a");
+        a.download = $f.textContent + ".ks";
+        a.href = URL.createObjectURL(new Blob([$f.editor.sess.getValue()]));
+        a.click();
+        return e.preventDefault();
+      }
+  }
+});
+
+if(localStorage.getItem("cache")) try{
+  let cache = JSON.parse(localStorage.getItem("cache"));
+  for(n of Object.keys(cache)) {
+    file_add(n).editor.sess.session.doc.setValue(cache[n]);
+  };
+}finally{}
+else {
+  file_add("main");
+  $files.children[0].onclick();
+}
+
+window.addEventListener("beforeunload", ()=> {
+  let cache = {};
+  $files.querySelectorAll("div").forEach($f=> {
+    cache[$f.textContent] = $f.editor.sess.getValue();
+  });
+  localStorage.setItem("cache", JSON.stringify(cache));
+});
+
+// console.log("%cKey Lang", "background-image:linear-gradient(30deg, #effa, #bcc8);padding:20px 40px;line-height:36px;font-size:24px;color:#344;");
+
+// 缓存文件 ctrl+s ctrl+enter

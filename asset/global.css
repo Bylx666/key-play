@@ -35,9 +35,6 @@ a:hover, jmp:hover {
   background-color: #fff3;
   text-shadow: 0 0 2px #000;
 }
-::-webkit-scrollbar {
-  display: none;
-}
 html {
   position: fixed;
   width: 100%;height: 100%;
@@ -163,18 +160,26 @@ body > main {
   box-shadow: 0 0 10px #1C2222;
   display: flex;
 }
-body > main.console::after {
-  content: "请打开控制台";
-  text-shadow: 0 0 3px #fff;
-  color: #dee;
-  animation: blink 5s infinite;
+
+body > main::before {
+  content: "\e829";
+  font-family: icon;
+  color: #566;
   position: absolute;
-  left: 0;
+  left: 70px;
+  bottom: 10px;
+  font-size: 40px;
+  line-height: 60px;
+}
+body > main::after {
+  content: "\e850请打开控制台";
+  font-family: icon;
+  color: #788;
+  position: absolute;
+  right: 30px;
   bottom: 30px;
-  text-align: center;
-  width: 100%;
-  font-size: 20px;
-  line-height: 30px;
+  font-size: 15px;
+  line-height: 20px;
 }
 
 #codes {
@@ -198,6 +203,9 @@ body > main.console::after {
   width: 600px;
   overflow: auto hidden;
   scrollbar-width: none;
+}
+#codes > files::-webkit-scrollbar {
+  display: none;
 }
 #codes > files > div {
   background-color: transparent;
@@ -390,6 +398,10 @@ body > tip > div input:focus {
 body > tip > div > input {
   margin-top: 30px;
   text-align: center;
+}
+
+body > tip > div > inf > p {
+  margin: 50px 0;
 }
 
 

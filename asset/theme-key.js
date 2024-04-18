@@ -53,10 +53,6 @@ define(
 .ace_active-line {
   background-color: #7888;
 }
-.ace_scrollbar {
-  display:none;
-  scrollbar-width: none;
-}
 `;
   }
 ),
