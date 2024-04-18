@@ -133,4 +133,12 @@ if(window.opener) {
   }
   window.addEventListener("beforeunload", ()=> window.opener.postMessage("close", "*"));
 }
-// ctrl +enter, +s 滚动条
+
+load("load");
+
+let console_tester = /./;
+console_tester.toString = ()=> {
+  document.querySelector("main").className = "";
+};
+console.log(console_tester);
+console.log("%c欢迎来到Key Lang", "background-image:linear-gradient(30deg, #effa, #bcc8);padding:20px 40px;line-height:36px;font-size:24px;color:#344;");

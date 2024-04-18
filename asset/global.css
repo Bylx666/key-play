@@ -163,6 +163,19 @@ body > main {
   box-shadow: 0 0 10px #1C2222;
   display: flex;
 }
+body > main.console::after {
+  content: "请打开控制台";
+  text-shadow: 0 0 3px #fff;
+  color: #dee;
+  animation: blink 5s infinite;
+  position: absolute;
+  left: 0;
+  bottom: 30px;
+  text-align: center;
+  width: 100%;
+  font-size: 20px;
+  line-height: 30px;
+}
 
 #codes {
   width: 800px;
