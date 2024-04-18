@@ -26,14 +26,7 @@ function create_editor() {
   const $file_add = new_dom("ico");
   const file_add = (name)=> {
     let $f = new_dom("div");
-    $f.onclick = ()=> {
-      $codes.children[1].remove();
-      $codes.append($f.editor);
-
-      for($file of $files.children) $file.className = "";
-      $f.className = "act";
-    }
-    $f.ondblclick = ()=> {
+    const modify_name = ()=> {
       let $inp = new_dom("input");
       $inp.value = $f.textContent;
       $inp.onchange = ()=> {
@@ -43,9 +36,21 @@ function create_editor() {
       };
       tip($inp, "修改你的文件名");
     };
+
+    $f.onclick = ()=> {
+      $codes.children[2].remove();
+      $codes.append($f.editor);
+
+      for($file of $files.children) $file.className = "";
+      $f.className = "act";
+    }
+    $f.ondblclick = modify_name;
     $f.oncontextmenu = (e)=> {
       const $file_menu = new_dom("file-menu");
       let {clientX, clientY} = e;
+      let $modify = new_dom("div");
+      let $delete = new_dom("div");
+
       e.preventDefault();
       $file_menu.style.cssText = `left:${clientX}px;top:${clientY}px`;
       $codes.append($file_menu);
@@ -53,6 +58,13 @@ function create_editor() {
         document.removeEventListener("click", _cl);
         $file_menu.remove();
       });
+
+      $modify.innerHTML = "<ico>&#xe839;</ico>改名";
+      $modify.onclick = modify_name;
+      $file_menu.append($modify);
+      $delete.innerHTML = "<ico>&#xe83b;</ico>删除";
+      $delete.onclick = ()=> $f.remove();
+      $file_menu.append($delete);
     }
 
     $f.editor = create_editor();
@@ -98,8 +110,6 @@ function tip(elem, title) {
 $tip.onclick = tip_close;
 $tip_inn.onclick = (e)=> e.stopPropagation();
 
-// replace(">", "")
-
 let $clickeff = document.querySelector("click-effect");
 document.addEventListener("click", (e)=> {
   let d = new_dom("div");
@@ -107,3 +117,5 @@ document.addEventListener("click", (e)=> {
   d.onanimationend = ()=> d.remove();
   $clickeff.append(d);
 });
+
+// ctrl +enter, +s 滚动条

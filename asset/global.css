@@ -98,9 +98,7 @@ body > header > buts > but {
   padding: 0 20px;
   cursor: pointer;
 }
-body > header > buts > but::before {
-  content: "\e86f";
-  font-family: icon;
+body > header > buts > but > ico {
   padding-right: 5px;
 }
 body > header > buts > but:hover {
@@ -173,7 +171,7 @@ body > main {
 #codes.overflow::after {
   content: "使用shift+滚轮进行滚动";
   position: absolute;
-  right: 30px;
+  right: 180px;
   top: 10px;
   color: #677;
   font-size: 12px;
@@ -184,7 +182,7 @@ body > main {
   height: 50px;
   font-size: 20px;
   color: #cdd;
-  width: 740px;
+  width: 600px;
   overflow: auto hidden;
   scrollbar-width: none;
 }
@@ -225,18 +223,59 @@ body > main {
 }
 
 #codes > file-menu {
+  z-index: 99;
   position: fixed;
-  height: 50px;
-  width: 100px;
+  width: 160px;
   background-color: #344a;
   backdrop-filter: blur(3px);
   animation: fade-in 0.2s;
   color: #fff;
   box-shadow: 0 0 3px 1px #233;
   border-radius: 10px;
+  padding: 5px 10px;
 }
 #codes > file-menu > div {
+  padding: 5px 20px;
+  margin: 5px;
+  font-size: 15px;
+  border-radius: 10px;
+  transition: background-color 0.2s;
+  cursor: pointer;
+}
+#codes > file-menu > div > ico {
+  padding-right: 5px;
+}
+#codes > file-menu > div:hover {
+  background-color: #eff5;
+}
 
+#codes > run {
+  position: absolute;
+  right: 30px;
+  top: 30px;
+  height: 40px;
+  line-height: 40px;
+  font-size: 20px;
+  color: #abb;
+  background-color: #4555;
+  width: 120px;
+  text-align: center;
+  border-radius: 10px;
+  transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+}
+#codes > run::before {
+  content: "\e842";
+  padding-right: 10px;
+  font-family: icon;
+}
+#codes > run::after {
+  content: "运行";
+}
+#codes > run:hover {
+  background-color: #ebb;
+  color: #122;
+  box-shadow: 0 0 3px 2px #ebb;
 }
 
 #codes > div {
