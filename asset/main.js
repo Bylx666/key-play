@@ -126,8 +126,14 @@ document.addEventListener("click", (e)=> {
 if(window.opener) {
   window.opener.postMessage("load", "*");
   window.onmessage = ({data})=> {
-    if(typeof data==="string") 
-      file_add("sample").editor.sess.session.doc.setValue(data);
+    if(typeof data==="string") {
+      let file = file_add("sample");
+      if(data.startsWith("// module")) 
+        file.textContent = "module.ks";
+      else if(data.startsWith("// main")) 
+        file.textContent = "main";
+      file.editor.sess.session.doc.setValue(data);
+    }
   }
   window.addEventListener("beforeunload", ()=> window.opener.postMessage("close", "*"));
 }
