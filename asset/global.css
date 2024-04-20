@@ -448,3 +448,23 @@ code {
 a > code:hover, jmp > code:hover {
   text-shadow: 0 0 3px #fff;
 }
+
+@media (max-width: 800px) {
+  body > header > buts {
+    display: none;
+  }
+  body > main {
+    display: none;
+  }
+  html::after {
+    content: "请使用宽屏幕设备";
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    text-align: center;
+    color: #eff;
+    text-shadow: 0 0 3px #dee;
+    font-size: 30px;
+    animation: blink 5s infinite;
+  }
+}
